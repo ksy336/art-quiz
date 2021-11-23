@@ -1,34 +1,55 @@
-
+import "./styles.scss";
 import Controls from "./control";
+import Categories from "./pages/categories/categories";
 
 export class App extends Controls {
+  private header: Controls<HTMLElement>;
+
   constructor(parentNode:HTMLElement) {
-    super(parentNode, "div", "", "Home");
+    super(parentNode, "div", "main__wrapper");
+    this.header = new Controls(this.node, "div",  "header", "");
+    const container = new Container(this.node);
+  }
+}
+
+export class Container extends Controls {
+  constructor(parentNode:HTMLElement) {
+    super(parentNode, "div", "container");
     this.startCycle();
   }
-
   startCycle() {
-    const picturesQuiz = new PicturesQuiz(this.node);
-    const artistsQuiz = new ArtistsQuiz(this.node);
-    picturesQuiz.onPlayToCatClick = () => {
-      picturesQuiz.destroy();
-      artistsQuiz.destroy();
-      const categories = new Categories(this.node);
-      categories.onGoHomeClick = () => {
-        categories.destroy();
-        this.startCycle();
+      const picturesQuiz = new PicturesQuiz(this.node);
+      const artistsQuiz = new ArtistsQuiz(this.node);
+      const settings = new Settings(this.node);
+      picturesQuiz.onPlayToCatClick = () => {
+        picturesQuiz.destroy();
+        artistsQuiz.destroy();
+        settings.destroy();
+        const categories = new Categories(this.node);
+        categories.onGoHomeClick = () => {
+          categories.destroy();
+          this.startCycle();
+        }
+      }
+      artistsQuiz.onPlayClick = () => {
+        artistsQuiz.destroy();
+        picturesQuiz.destroy();
+        settings.destroy();
+        const categories = new Categories(this.node);
+        categories.onGoHomeClick = () => {
+          categories.destroy();
+          this.startCycle();
+        }
+      }
+      settings.onGoSettingsClick = () => {
+        artistsQuiz.destroy();
+        picturesQuiz.destroy();
+        settings.onGoBackClick = () => {
+          settings.destroy();
+          this.startCycle();
+        }
       }
     }
-    artistsQuiz.onPlayClick = () => {
-      artistsQuiz.destroy();
-      picturesQuiz.destroy();
-      const categories = new Categories(this.node);
-      categories.onGoHomeClick = () => {
-        categories.destroy();
-        this.startCycle();
-      }
-    }
-  }
 }
 
 export class ArtistsQuiz extends Controls {
@@ -36,8 +57,8 @@ export class ArtistsQuiz extends Controls {
   public onPlayClick: () => void;
 
   constructor(parentNode:HTMLElement) {
-    super(parentNode, "div", "", "Artists Quiz");
-    this.playButton = new Controls(this.node, "button", "", "Start Game");
+    super(parentNode, "div", "main artists__block");
+    this.playButton = new Controls(this.node, "button", "pic__button", "Artists Quiz");
     this.playButton.node.onclick = () => {
       this.onPlayClick();
     }
@@ -49,43 +70,39 @@ export class PicturesQuiz extends Controls {
   public onPlayToCatClick: ()=>void;
 
   constructor(parentNode:HTMLElement) {
-    super(parentNode, "div", "", "Pictures Quiz");
-    this.playButton = new Controls(this.node, "button", "", "Start Game");
+    super(parentNode, "div", " main pictures__block");
+    this.playButton = new Controls(this.node, "button", "pic__button", "Pictures Quiz");
     this.playButton.node.onclick = () => {
       this.onPlayToCatClick();
     }
   }
 }
 
-export class Categories extends Controls {
-  private goHomeButton: Controls<HTMLButtonElement>;
-  public onGoHomeClick: () => void;
-  private categ: any;
+export class Settings extends Controls {
+  private goSettingsButton: Controls<HTMLButtonElement>;
+  private goBackButton: Controls<HTMLButtonElement>;
+  public onGoBackClick: () => void;
+  public onGoSettingsClick: () => void;
+  private goBack: HTMLElement;
 
   constructor(parentNode:HTMLElement) {
-    super(parentNode, "div", "categ", "Categories");
-    this.animationPhoto()
-    this.goHomeButton = new Controls(this.node, "button", "","Go Home");
-    this.categ = new Controls(this.node, "div", "category__item", "");
-    this.goHomeButton.node.onclick = () => {
-      this.onGoHomeClick();
-    }
-  }
-
-  private async animationPhoto() {
-    try {
-      const photos = "./assets/data.json";
-      const response = await fetch(photos);
-      console.log(response);
-      const myData = await response.json();
-      console.log(myData[0].author);
-      const myAuthor = myData[0].author;
-
-    } catch {
+    super(parentNode, "div", "settings");
+    this.goSettingsButton = new Controls(this.node, "button", "settings__button", "Settings");
+    this.goBackButton = new Controls(this.node, "button", "settings__button-home","Home");
+    const goBack = document.querySelector<HTMLElement>(".settings__button-home");
+    const settingBack = document.querySelector<HTMLElement>(".settings__button");
+    this.goSettingsButton.node.onclick = () => {
+      this.onGoSettingsClick();
+      if(goBack) {
+        goBack.style.display = "flex";
+      }
+      if(settingBack) {
+        settingBack.style.display = "none";
+      }
 
     }
+    this.goBackButton.node.onclick = () => {
+      this.onGoBackClick();
+    }
   }
-
 }
-
-

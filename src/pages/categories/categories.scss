@@ -1,0 +1,23 @@
+.categ {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header__cat {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  background-color: #7b6a58;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 300;
+  letter-spacing: normal;
+  line-height: 22px;
+  font-family: Arial, sans-serif;
+  text-transform: uppercase;
+  width: 220px;
+  color: white;
+}
