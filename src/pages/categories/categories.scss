@@ -20,4 +20,16 @@
   text-transform: uppercase;
   width: 220px;
   color: white;
+  position: absolute;
+  top: 140px;
+  left: 650px;
+}
+
+@media screen and (max-width: 1074px) {
+  .header__cat {
+    position: relative;
+    top: -100px;
+    left: 40px;
+
+  }
 }
