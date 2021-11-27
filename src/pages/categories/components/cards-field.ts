@@ -79,13 +79,9 @@ class CardsField extends Controls {
     }
   ]
   private categ: Controls<HTMLElement>;
-  // private cardsField: Controls<HTMLElement>;
 
   constructor(parentNode: HTMLElement) {
     super(parentNode, 'div', 'cards-field', "Categories");
-    // this.categ = new Controls(this.node, 'div', "header__cat", 'Categories');
-    // this.categ = new Controls(this.node, 'div', "header__cat", 'Categories');
-    // this.header = new Controls(this.node, 'div', 'header__cat' );
     this.node.innerHTML = `
     <div class="header__cat">Categories</div>
         ${this.items.map((item) => `

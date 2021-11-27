@@ -1,41 +1,30 @@
-body {
-  background-color: lightgrey;
-
-}
 .button__categ {
   display: flex;
   position: absolute;
   top: 140px;
-  left: 1100px;
+  left: 900px;
   text-align: center;
 }
 
 .question {
   margin-top: 70px;
-  margin-bottom: 50px;
+  margin-bottom: 100px;
   font-size: 28px;
   font-weight: bold;
   font-family: Arial, sans-serif;
 }
-
 .img__for__pictures {
-  display: flex;
-  justify-content: center;
-  //width: 80%;
+  width: 80%;
   height: 520px;
   border-radius: 15px;
   background-position: 50%;
   background-repeat: no-repeat;
   background-size: cover;
-  box-shadow: 2px 2px 15px #000;
-  position: relative;
-  margin-left: 300px;
-  margin-bottom: 50px;
 }
 
 @media screen and (max-width: 1074px) {
   .img__for__pictures {
-    height: 90vw;
+    height: 90vh;
     max-height: 600px;
   }
   .button__categ {
