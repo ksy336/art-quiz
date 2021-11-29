@@ -17,5 +17,9 @@ import DataHolder from "../../dataHolder";
       this.onGoCategoryClick();
     }
   }
+  getImages() {
+
+  }
+
 }
 export default QuestionsForArtists;

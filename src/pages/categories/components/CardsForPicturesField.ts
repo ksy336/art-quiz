@@ -1,90 +1,17 @@
 import Controls from '../../../control';
 import './cards-field.scss';
 import QuestionsForArtists from "../../QuestionsPage/QuestionsForArtists";
+import {itemsForPictures} from "../../../utils";
 
 class CardsForPicturesField extends Controls {
-  private items = [
-    {
-      name: "Portrait",
-      img: "120",
-      url:"",
-      total: ""
-    },
-    {
-      name: "Landscape",
-      img: "130",
-      url:"",
-      total: ""
-    },
-    {
-      name: "Still Life",
-      img: "140",
-      url:"",
-      total: ""
-    },
-    {
-      name: "Graphic",
-      img: "150",
-      url:"",
-      total: ""
-    },
-    {
-      name: "Antique",
-      img: "160",
-      url:"",
-      total: ""
-    },
-    {
-      name: "Avant-Garde",
-      img: "170",
-      url:"",
-      total: ""
-    },
-    {
-      name: "Renaissance",
-      img: "180",
-      url:"",
-      total: ""
-    },
-    {
-      name: "Surrealism",
-      img: "190",
-      url:"",
-      total: ""
-    },
-    {
-      name: "Kitsch",
-      img: "200",
-      url:"",
-      total: ""
-    },
-    {
-      name: "Minimalism",
-      img: "210",
-      url:"",
-      total: ""
-    },
-    {
-      name: "Avangard",
-      img: "220",
-      url:"",
-      total: ""
-    },
-    {
-      name: "Industrial",
-      img: "230",
-      url:"",
-      total: ""
-    }
-  ]
   private categ: Controls<HTMLElement>;
 
   constructor(parentNode: HTMLElement) {
     super(parentNode, 'div', 'cards-field', "Categories");
     this.node.innerHTML = `
     <div class="header__cat">Categories</div>
-        ${this.items.map((item) => `
-            <div class="card">
+        ${itemsForPictures.map((item) => `
+            <div class="card" data-set="${item.number}">
                 <div class="img__name">${item.name}
                     <div class="item-total">${item.total}</div>
                  </div>
@@ -101,6 +28,9 @@ class CardsForPicturesField extends Controls {
             cardsF.remove();
           }
           const questionsField = new QuestionsForArtists(parentNode);
+          const attribute = card.getAttribute("data-set");
+          const n = `${attribute}`;
+          console.log(n);
           questionsField.onGoCategoryClick = () => {
             questionsField.destroy();
             const cardsField = new CardsForPicturesField(parentNode);
