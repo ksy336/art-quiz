@@ -65,28 +65,28 @@ class DataHolder {
       const response = await fetch(photos);
       // console.log(response);
       const myData = await response.json();
-      // console.log(myData);
-      // const allAuthors = [...myData].map((item) => item.author);
-      // const authors = this.getUniqueValuesFromArray(allAuthors);
-      // const randomAuthors = this.getImage(authors.length);
-      // // console.log(randomAuthors);
-      // // console.log(authors);
-      // const correctAuthor = [`${randomAuthors}, ${randomAuthors}, ${randomAuthors}`];
-      // // console.log(correctAuthor);
-      // // Images
-      // const portraitImages = [...myData]
-      //   .slice(0, 10)
-      //   .map((item) => item.imageNum)
-      //   .map((item) => {
-      //     const img = new Image();
-      //     img.src = `./assets/full/${item}full.jpg`;
-      //     return img.currentSrc;
-      //     // img.classList.add("img__for__pictures");
-      //     // document.body.textContent = `img.currentSrc`;
-      //     // return  document.body.append(img);
-      //     }
-      //   );
-      // console.log(portraitImages);
+      console.log(myData);
+      const allAuthors = [...myData].map((item) => item.author);
+      const authors = this.getUniqueValuesFromArray(allAuthors);
+      const randomAuthors = this.getImage(authors.length);
+      console.log(randomAuthors);
+       console.log(authors);
+      const correctAuthor = [`${randomAuthors}, ${randomAuthors}, ${randomAuthors}`];
+      // console.log(correctAuthor);
+      // Images
+      const portraitImages = [...myData]
+        .slice(0, 10)
+        .map((item) => item.imageNum)
+        .map((item) => {
+          const img = new Image();
+          img.src = `./assets/full/${item}full.jpg`;
+          return img.currentSrc;
+          // img.classList.add("img__for__pictures");
+          // document.body.textContent = `img.currentSrc`;
+          // return  document.body.append(img);
+          }
+        );
+      console.log(portraitImages);
 
      //  const img = new Image();
      // // const pic = this.getImage(240);

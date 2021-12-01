@@ -60,6 +60,28 @@
   cursor: pointer;
 }
 
+.pictures__forquestions-pic {
+  display: flex;
+  justify-content: center;
+  width: 50vw;
+  height: 520px;
+  border-radius: 15px;
+  background-position: 50%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  box-shadow: 2px 2px 15px #000;
+  position: relative;
+  margin: 0 auto;
+}
+
+@media screen and (max-width: 1074px) {
+  .pictures__forquestions-pic {
+    height: 90vw;
+    max-height: 600px;
+    width: 90vw;
+  }
+}
+
 @media screen and(max-width: 520px) {
   .cards-field {
     padding: 0 10px 10px;

@@ -4,83 +4,14 @@ import QuestionsForArtists from "../../QuestionsPage/QuestionsForArtists";
 import Categories from "../categories";
 import {items} from "../../../utils";
 
+
+export let attribute: any;
+export let n: number;
+export let pict : number;
+export let myImage: string;
+
 class CardsField extends Controls {
-  // private items = [
-  //   {
-  //     number: 0,
-  //     name: "Portrait",
-  //     img: "0",
-  //     url:"",
-  //     total: ""
-  //   },
-  //   {
-  //     name: "Landscape",
-  //     img: "10",
-  //     url:"",
-  //     total: ""
-  //   },
-  //   {
-  //     name: "Still Life",
-  //     img: "20",
-  //     url:"",
-  //     total: ""
-  //   },
-  //   {
-  //     name: "Graphic",
-  //     img: "30",
-  //     url:"",
-  //     total: ""
-  //   },
-  //   {
-  //     name: "Antique",
-  //     img: "40",
-  //     url:"",
-  //     total: ""
-  //   },
-  //   {
-  //     name: "Avant-Garde",
-  //     img: "50",
-  //     url:"",
-  //     total: ""
-  //   },
-  //   {
-  //     name: "Renaissance",
-  //     img: "60",
-  //     url:"",
-  //     total: ""
-  //   },
-  //   {
-  //     name: "Surrealism",
-  //     img: "70",
-  //     url:"",
-  //     total: ""
-  //   },
-  //   {
-  //     name: "Kitsch",
-  //     img: "80",
-  //     url:"",
-  //     total: ""
-  //   },
-  //   {
-  //     name: "Minimalism",
-  //     img: "90",
-  //     url:"",
-  //     total: ""
-  //   },
-  //   {
-  //     name: "Avangard",
-  //     img: "100",
-  //     url:"",
-  //     total: ""
-  //   },
-  //   {
-  //     name: "Industrial",
-  //     img: "110",
-  //     url:"",
-  //     total: ""
-  //   }
-  // ]
-  private categ: Controls<HTMLElement>;
+  public categ: Controls<HTMLElement>;
 
   constructor(parentNode: HTMLElement) {
     super(parentNode, 'div', 'cards-field', "Categories");
@@ -104,12 +35,23 @@ class CardsField extends Controls {
             cardsF.remove();
           }
           const questionsField = new QuestionsForArtists(parentNode);
-          const attribute = card.getAttribute("data-set");
-          const n = `${attribute}`;
-          console.log(n);
+          attribute = card.getAttribute("data-set");
+          n = Number(`${attribute}`);
+          pict = (n * 10);
+          myImage = `/assets/full/${pict}full.jpg`;
+          const img = new Image();
+          img.classList.add("pictures__forquestions-pic");
+          img.src = `${myImage}`;
+          parentNode.append(img);
+          console.log(pict);
+           console.log(img);
           questionsField.onGoCategoryClick = () => {
             questionsField.destroy();
             const cardsField = new CardsField(parentNode);
+            const removeImage = document.querySelector('.pictures__forquestions-pic');
+            if(removeImage) {
+              removeImage.remove();
+            }
           }
         })
       })

@@ -2,6 +2,8 @@ import Controls from '../../../control';
 import './cards-field.scss';
 import QuestionsForArtists from "../../QuestionsPage/QuestionsForArtists";
 import {itemsForPictures} from "../../../utils";
+import QuestionsForPictures from "../../QuestionsPage/QuestionForPictures/QuestionForPictures";
+
 
 class CardsForPicturesField extends Controls {
   private categ: Controls<HTMLElement>;
@@ -27,13 +29,26 @@ class CardsForPicturesField extends Controls {
           if (cardsF) {
             cardsF.remove();
           }
-          const questionsField = new QuestionsForArtists(parentNode);
+          const questionsField = new QuestionsForPictures(parentNode);
           const attribute = card.getAttribute("data-set");
-          const n = `${attribute}`;
-          console.log(n);
+          // let res = [];
+          // const n = Number(`${attribute}`);
+          // const pict = (n * 10);
+          // const myImage = `/assets/full/${pict}full.jpg`;
+          // const img = new Image();
+          // img.classList.add("pictures__forquestions");
+          // img.src = `${myImage}`;
+          // parentNode.append(img);
+          // res.push(img);
+          // console.log(pict);
+          // console.log(img);
           questionsField.onGoCategoryClick = () => {
             questionsField.destroy();
             const cardsField = new CardsForPicturesField(parentNode);
+            const removeImage = document.querySelector('.pictures__forquestions');
+            if(removeImage) {
+              removeImage.remove();
+            }
           }
         })
       })

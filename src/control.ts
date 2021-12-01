@@ -19,5 +19,9 @@ class Controls<NodeType extends HTMLElement = HTMLElement> {
   destroy(): void {
     this.node.remove();
   }
+
+  append(img: HTMLImageElement) {
+    this.node.append(img);
+  }
 }
 export default Controls;
