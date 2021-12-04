@@ -18,26 +18,81 @@ body {
   font-family: Arial, sans-serif;
 }
 
-.img__for__pictures {
+.pictures__container {
+  margin-bottom: 20px;
+}
+
+.answers__container {
   display: flex;
-  justify-content: center;
-  width: 50vw;
-  height: 520px;
-  border-radius: 15px;
-  background-position: 50%;
-  background-repeat: no-repeat;
-  background-size: cover;
-  box-shadow: 2px 2px 15px #000;
-  position: relative;
- margin: 0 auto;
+  justify-content: space-between;
+  flex-direction: row;
+  flex-wrap: wrap;
+  max-width: 800px;
+  width: 70%;
+  padding: 0 10px;
+  margin: 0 auto;
+
+  &:hover {
+    background-color: lightgrey;
+  }
+}
+
+.answer__item {
+  box-sizing: border-box;
+  color: dimgray;
+  font-family: Arial, sans-serif;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 300;
+  letter-spacing: normal;
+  line-height: 29px;
+  list-style: none;
+  padding: 20px;
+  width: 50%;
+  cursor: pointer;
+
+  &:hover {
+    background-color: lightgrey;
+  }
+  &:focus {
+    background-color: white;
+  }
+}
+.answers__container .answer__item:hover {
+  background-color: white;
+}
+.answers__container .answer__item:active {
+  background-color: lightgrey;
+}
+
+.answer__item:nth-of-type(2) {
+  border-bottom: 1px dimgray solid;
+  border-left:  1px dimgray solid;
+}
+.answer__item:nth-of-type(3) {
+  border-top: 1px dimgray solid;
+  border-right:  1px dimgray solid;
+}
+.answer__item:first-of-type {
+  border-bottom: 1px dimgray solid;
+  border-right:  1px dimgray solid;
+}
+.answer__item:last-of-type {
+  border-top: 1px dimgray solid;
+  border-left:  1px dimgray solid;
 }
 
 @media screen and (max-width: 1074px) {
+  .answers__container {
+    width: 100%;
+  }
+
   .img__for__pictures {
     height: 90vw;
     max-height: 600px;
     width: 90vw;
   }
+
   .button__categ {
     position: absolute;
     left: 60px;
@@ -46,5 +101,13 @@ body {
   .question {
     font-size: 22px;
     text-align: center;
+  }
+}
+
+@media screen and (max-width: 580px) {
+  .answer__item {
+    font-size: 20px;
+    line-height: 20px;
+    padding: 5px;
   }
 }

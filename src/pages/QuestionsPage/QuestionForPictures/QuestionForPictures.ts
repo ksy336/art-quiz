@@ -2,6 +2,8 @@
 import "./QuestionForPictures.scss";
 import Controls from "../../../control";
 import DataHolder from "../../../dataHolder";
+import {itemsForPictures} from "../../../utils";
+import {n} from "../../categories/components/CardsForPicturesField";
 
 class QuestionsForPictures extends Controls {
   private goCategoryButton: Controls<HTMLButtonElement>;
@@ -19,9 +21,6 @@ class QuestionsForPictures extends Controls {
     }
     this.getAuthors();
   }
-  getImage(max: number) {
-    return Math.floor(Math.random() * max);
-  }
 
   getUniqueValuesFromArray(arr: any) {
     let result: string | any[] = [];
@@ -33,40 +32,123 @@ class QuestionsForPictures extends Controls {
     }
     return result;
   }
-
   async getAuthors() {
     try {
       const photos = './assets/data.json';
       const response = await fetch(photos);
       const myPicture = await response.json();
 
-
       const allAuthors = [...myPicture].map((item) => item.author);
       const authors = this.getUniqueValuesFromArray(allAuthors);
-      const randomAuthors = authors.sort(() => 0.5 - Math.random()).slice(0, 10);
-      //const newAuthor = [...authors[randomAuthors]].join('');
+      const newAr = Object.entries(myPicture[5]);
+      const picturesOwners = [...myPicture].map(item => {
+        const result = [];
+        result.push(item.author, item.imageNum);
+        return result;
+      });
+      console.log(picturesOwners);
 
-      console.log(randomAuthors);
-       const myPict = document.querySelector('.question');
-      const container = document.querySelector('.questions-container');
-       if(myPict) {
-          //myPict.textContent = `Какую картину написал ${newAuthor}?`;
-       }
+      const myPict = document.querySelector('.question');
+      let randomAuthors: any;
+      switch(n) {
+        case 0:
+          randomAuthors = authors.slice(0, 10).sort();
+          console.log(randomAuthors);
+          if (myPict) {
+            myPict.textContent = `Какую картину написал ${randomAuthors[0]}?`;
+          }
+          break;
+        case 1:
+          randomAuthors = authors.slice(10, 20);
+          console.log(randomAuthors);
+          if (myPict) {
+            myPict.textContent = `Какую картину написал ${randomAuthors[0]}?`;
+          }
+          break;
+        case 2:
+          randomAuthors = authors.slice(20, 30);
+          console.log(randomAuthors);
+          if (myPict) {
+            myPict.textContent = `Какую картину написал ${randomAuthors[0]}?`;
+          }
+          break;
+        case 3:
+          randomAuthors = authors.slice(30, 40);
+          if (myPict) {
+            myPict.textContent = `Какую картину написал ${randomAuthors[0]}?`;
+          }
+          break;
+        case 4:
+          randomAuthors = authors.slice(40, 50);
+          console.log(randomAuthors);
+          if (myPict) {
+            myPict.textContent = `Какую картину написал ${randomAuthors[0]}?`;
+          }
+          break;
+        case 5:
+          randomAuthors = authors.slice(50, 60);
+          console.log(randomAuthors);
+          if (myPict) {
+            myPict.textContent = `Какую картину написал ${randomAuthors[0]}?`;
+          }
+          break;
+        case 6:
+          randomAuthors = authors.slice(60, 70);
+          console.log(randomAuthors);
+          if (myPict) {
+            myPict.textContent = `Какую картину написал ${randomAuthors[0]}?`;
+          }
+          break;
+        case 7:
+          randomAuthors = authors.slice(70, 80);
+          console.log(randomAuthors);
+          if (myPict) {
+            myPict.textContent = `Какую картину написал ${randomAuthors[0]}?`;
+          }
+          break;
+        case 8:
+          randomAuthors = authors.slice(80, 90);
+          console.log(randomAuthors);
+          if (myPict) {
+            myPict.textContent = `Какую картину написал ${randomAuthors[0]}?`;
+          }
+          break;
+        case 9:
+          randomAuthors = authors.slice(90, 93);
+          console.log(randomAuthors);
+          if (myPict) {
+            myPict.textContent = `Какую картину написал ${randomAuthors[0]}?`;
+          }
+          break;
+        case 10:
+          randomAuthors = authors.slice(5, 15);
+          console.log(randomAuthors);
+          if (myPict) {
+            myPict.textContent = `Какую картину написал ${randomAuthors[0]}?`;
+          }
+          break;
+        case 11:
+          randomAuthors = authors.slice(15, 25);
+          console.log(randomAuthors);
+          if (myPict) {
+            myPict.textContent = `Какую картину написал ${randomAuthors[0]}?`;
+          }
+          break;
+      }
+      const matchingPictures = [...picturesOwners].map(item => {
+        let res = [];
+        const img = new Image();
+        img.src = `./assets/full/${item[1]}full.jpg`;
+        if(item[0]=== img.src) {
+          res.push(img.src)
+        };
+        console.log(item[0]);
+        return img;
+      })
+      console.log(matchingPictures);
 
       const portraitImages = [...myPicture]
         .map(item => item.imageNum);
-
-      const newArray = [...authors, ...portraitImages];
-      console.log(newArray);
-
-      const allItemsFromData = [...myPicture].map(item => {
-        let res = [];
-        res.push(item.author);
-        res.push(item.imageNum);
-        return res;
-      })
-      console.log(allItemsFromData);
-
       const randomPictures = portraitImages.sort(() => 0.5 - Math.random()).slice(0, 4).map((item) => {
         const img = new Image();
         img.src = `./assets/full/${item}full.jpg`;
@@ -77,8 +159,6 @@ class QuestionsForPictures extends Controls {
       });
       console.log(randomPictures);
 
-      // const newArray = [...authors, ...portraitImages];
-      // console.log(newArray);
 
     } catch (error) {
       if (error) {

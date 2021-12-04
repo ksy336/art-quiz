@@ -3,7 +3,8 @@ import './cards-field.scss';
 import QuestionsForArtists from "../../QuestionsPage/QuestionsForArtists";
 import {itemsForPictures} from "../../../utils";
 import QuestionsForPictures from "../../QuestionsPage/QuestionForPictures/QuestionForPictures";
-
+export let attribute : string | number | null;
+export let n: number;
 
 class CardsForPicturesField extends Controls {
   private categ: Controls<HTMLElement>;
@@ -21,6 +22,7 @@ class CardsForPicturesField extends Controls {
             </div>
         `)}
     `
+
     const questionsButton = Array.from(document.querySelectorAll(".card"));
     const cardsF = document.querySelector<HTMLElement>(".cards-field");
     if (questionsButton) {
@@ -30,18 +32,8 @@ class CardsForPicturesField extends Controls {
             cardsF.remove();
           }
           const questionsField = new QuestionsForPictures(parentNode);
-          const attribute = card.getAttribute("data-set");
-          // let res = [];
-          // const n = Number(`${attribute}`);
-          // const pict = (n * 10);
-          // const myImage = `/assets/full/${pict}full.jpg`;
-          // const img = new Image();
-          // img.classList.add("pictures__forquestions");
-          // img.src = `${myImage}`;
-          // parentNode.append(img);
-          // res.push(img);
-          // console.log(pict);
-          // console.log(img);
+          attribute = card.getAttribute("data-set");
+          n = Number(`${attribute}`);
           questionsField.onGoCategoryClick = () => {
             questionsField.destroy();
             const cardsField = new CardsForPicturesField(parentNode);
@@ -54,5 +46,46 @@ class CardsForPicturesField extends Controls {
       })
     }
   }
-}
+  getImage(max: number) {
+    return Math.floor(Math.random() * max);
+  }
+
+  getUniqueValuesFromArray(arr: any) {
+    let result: string | any[] = [];
+
+    for(let val of arr) {
+      if(!result.includes(val)) {
+        result.push(val);
+      }
+    }
+    return result;
+  }
+
+  // async getAuthors() {
+  //   try {
+  //     const photos = './assets/data.json';
+  //     const response = await fetch(photos);
+  //     const myPicture = await response.json();
+  //
+  //
+  //     const allAuthors = [...myPicture].map((item) => item.author);
+  //     const authors = this.getUniqueValuesFromArray(allAuthors);
+  //     const myPict = document.querySelector('.question');
+  //     let randomAuthors: any;
+  //     if (n === 0) {
+  //       randomAuthors = authors.slice(0, 10);
+  //       console.log(randomAuthors);
+  //       if (myPict) {
+  //         myPict.textContent = `Какую картину написал ${randomAuthors[0]}?`;
+  //       }
+  //     }
+  //   }
+  //   catch(e) {
+  //     if(e) {
+  //       console.log("Error");
+  //     }
+  //   }
+  //   }
+  }
+
 export default CardsForPicturesField;

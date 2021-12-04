@@ -38,13 +38,7 @@ class CardsField extends Controls {
           attribute = card.getAttribute("data-set");
           n = Number(`${attribute}`);
           pict = (n * 10);
-          myImage = `/assets/full/${pict}full.jpg`;
-          const img = new Image();
-          img.classList.add("pictures__forquestions-pic");
-          img.src = `${myImage}`;
-          parentNode.append(img);
-          console.log(pict);
-           console.log(img);
+
           questionsField.onGoCategoryClick = () => {
             questionsField.destroy();
             const cardsField = new CardsField(parentNode);
