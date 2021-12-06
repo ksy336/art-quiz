@@ -1,7 +1,7 @@
 import Controls from "../../control";
 import "./questionsForArtists.scss";
 import DataHolder from "../../dataHolder";
-import {n, pict} from "../categories/components/cards-field";
+import {n, pict} from "../categories/components/CategoriesForArtists";
 
  class QuestionsForArtists extends Controls {
    private goCategoryButton: Controls<HTMLButtonElement>;
@@ -9,16 +9,18 @@ import {n, pict} from "../categories/components/cards-field";
    private question: Controls<HTMLElement>;
    private answers: Controls<HTMLElement>;
    private picturesWrapper: Controls<HTMLElement>;
+   private author: string;
 
-  constructor(parentNode: HTMLElement) {
-    super(parentNode, "div", "questions-container");
+  constructor(parentNode: HTMLElement, author: string) {
+     super(parentNode, "div", "questions-container");
     this.goCategoryButton = new Controls(this.node, "button", "button__categ", "Categories");
     this.question = new Controls(this.node, "h3", "question", "Кто автор данной картины?");
     this.picturesWrapper = new Controls(this.node, "div", "pictures__container");
     this.answers = new Controls(this.node, "div", "answers__container");
-    const dataHolder = new DataHolder();
-    dataHolder.build();
+    this.author = author;
+
     this.getImages();
+
     this.goCategoryButton.node.onclick = () => {
       this.onGoCategoryClick();
     }
@@ -35,59 +37,65 @@ import {n, pict} from "../categories/components/cards-field";
      return result;
    }
 
+
   async getImages() {
     try {
       const photos = './assets/data.json';
       const response = await fetch(photos);
-      // console.log(response);
       const myPicture = await response.json();
-      const allAuthors = [...myPicture].map((item) => item.author);
-      console.log(allAuthors);
       const allAnswers = document.querySelector('.answers__container');
 
-     // Get right author
-     //  const correctAuthors = [...myPicture].map(item => item.imageNum);
-     //  let res:  null | Array<string> = [];
-     //  for(let i = 0; i < allAuthors.length; i++) {
-     //
-     //    for(let j = 0; j < correctAuthors.length; j++) {
-     //      if(allAuthors[i] === correctAuthors[j]) {
-     //        res.push(allAuthors[i]);
-     //        return res;
-     //      }
-     //    }
-     //  }
-     //  console.log(res);
-     // //  const correctAuthor = allAuthors.map(item => {
-     // //    const newAttribute = document.createElement("div");
-     // //    newAttribute.setAttribute("id", `${item}`);
-     // //    if(allAnswers) {
-     // //      allAnswers.append(newAttribute);
-     // //    }
-     // //  })
-     //  console.log(correctAuthors);
+      // Добавляю 4 варианта(автора) ответа на страницу (4 рандомных автора- 1 из них должен быть правильным)
+      const allAuthors = [...myPicture].map((item) => item.author);
+      const authors = this.getUniqueValuesFromArray(allAuthors);
+      const authorsData = this.getUniqueValuesFromArray(allAuthors).join(" ");
+      console.log(authorsData);
+
+      // создаю пустой массив,где будут храниться все 4 варианта ответов
+      const answers = [];
+      answers.push(this.author);
+
+      // Случайный автор
+      // const randomIndex = Math.floor(Math.random() * authors.length);
+      // const randomAuthor = authors[randomIndex];
+      // if(!answers.includes(randomAuthor)) {
+      //   answers.push(randomAuthor);
+      // }
+      // answers.push(randomAuthor);
+      // answers.push(randomAuthor);
+      //answers.sort(() => 0.5 - Math.random());
+      //console.log(answers);
+
+      let results = authors
+        .sort(() => 0.5 - Math.random())
+        .slice(0, 3);
+      let randomAuthor1 = results[0];
+      let randomAuthor2 = results[1];
+      let randomAuthor3 = results[2];
+      answers.push(randomAuthor1,randomAuthor2, randomAuthor3)
+      answers.sort(() => 0.5 - Math.random());
+      console.log(answers);
+      answers.map((item, i) => {
+           if(allAnswers) {
+            const gameAuthors = document.createElement("div");
+            gameAuthors.classList.add('answer__item');
+            // gameAuthors.setAttribute("id", `${randomAnswers[i].item.join("")}`);
+            allAnswers.append(gameAuthors);
+            gameAuthors.append(item);
+          }
+          return item;
+        });
+
+        const answerContainer = document.querySelector(".answers__container");
+        if(answerContainer) {
+          // answerContainer.addEventListener("click", showPopup);
+          // showPopup() {
+             // event.target.classList.add("popup__visible");
+        }
+          // }
+
       const portraitImages = [...myPicture]
         .map(item => item.imageNum);
-      const authors = this.getUniqueValuesFromArray(allAuthors);
-      const answers = authors
-        .sort(() => 0.5 - Math.random())
-        .slice(0,4)
-        .map((item, i) => {
-        // const allAnswers = document.querySelector('.answers__container');
-         if(allAnswers) {
-           const gameAuthors = document.createElement("div");
-           gameAuthors.classList.add('answer__item');
-           gameAuthors.setAttribute("id", `${item}`);
-           allAnswers.append(gameAuthors);
-           gameAuthors.append(item);
-          return item;
-        }
-          // if(allAuthors[i] === portraitImages[i]) {
-          //
-          // }
-      });
-      console.log(answers);
-
 
       const picturesWrapper = document.querySelector(".pictures__container");
       const myImage = `/assets/full/${pict}full.jpg`;

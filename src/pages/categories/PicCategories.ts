@@ -1,6 +1,6 @@
 import Controls from '../../control';
 import './categories.scss';
-import CardsForPicturesField from "./components/CardsForPicturesField";
+import CategoriesForPictures from "./components/CategoriesForPictures";
 
 class PicCategories extends Controls {
   private goHomeButton: Controls<HTMLButtonElement>;
@@ -10,7 +10,7 @@ class PicCategories extends Controls {
   constructor(parentNode: HTMLElement) {
     super(parentNode, 'div', "categ" );
     this.goHomeButton = new Controls(this.node, 'button', '', 'Home');
-    const cardsForPicturesField = new CardsForPicturesField(this.node);
+    const cardsForPicturesField = new CategoriesForPictures(this.node);
     this.goHomeButton.node.onclick = () => {
       this.onGoHomeClick();
     };

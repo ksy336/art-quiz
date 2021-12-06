@@ -1,6 +1,6 @@
 import Controls from '../../control';
 import './categories.scss';
-import CardsField from "./components/cards-field";
+import CardsField from "./components/CategoriesForArtists";
 import QuestionsForArtists from "../QuestionsPage/QuestionsForArtists";
 
 class Categories extends Controls {

@@ -5,7 +5,7 @@ import { PicturesQuiz } from './components/PicturesQuiz';
 import { Settings } from '../Settings/settings';
 import '../../styles.scss';
 import PicCategories from "../categories/PicCategories";
-import CardsField from "../categories/components/cards-field";
+import CardsField from "../categories/components/CategoriesForArtists";
 import QuestionsForArtists from "../QuestionsPage/QuestionsForArtists";
 
 export class Container extends Controls {

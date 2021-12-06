@@ -6,8 +6,7 @@ import QuestionsForPictures from "../../QuestionsPage/QuestionForPictures/Questi
 export let attribute : string | number | null;
 export let n: number;
 
-class CardsForPicturesField extends Controls {
-  private categ: Controls<HTMLElement>;
+class CategoriesForPictures extends Controls {
 
   constructor(parentNode: HTMLElement) {
     super(parentNode, 'div', 'cards-field', "Categories");
@@ -31,12 +30,12 @@ class CardsForPicturesField extends Controls {
           if (cardsF) {
             cardsF.remove();
           }
-          const questionsField = new QuestionsForPictures(parentNode);
+          const questionsForPictures = new QuestionsForPictures(parentNode, "img04");
           attribute = card.getAttribute("data-set");
           n = Number(`${attribute}`);
-          questionsField.onGoCategoryClick = () => {
-            questionsField.destroy();
-            const cardsField = new CardsForPicturesField(parentNode);
+          questionsForPictures.onGoCategoryClick = () => {
+            questionsForPictures.destroy();
+            const cardsField = new CategoriesForPictures(parentNode);
             const removeImage = document.querySelector('.pictures__forquestions');
             if(removeImage) {
               removeImage.remove();
@@ -88,4 +87,4 @@ class CardsForPicturesField extends Controls {
   //   }
   }
 
-export default CardsForPicturesField;
+export default CategoriesForPictures;

@@ -3,19 +3,21 @@ import "./QuestionForPictures.scss";
 import Controls from "../../../control";
 import DataHolder from "../../../dataHolder";
 import {itemsForPictures} from "../../../utils";
-import {n} from "../../categories/components/CardsForPicturesField";
+import {n} from "../../categories/components/CategoriesForPictures";
 
 class QuestionsForPictures extends Controls {
   private goCategoryButton: Controls<HTMLButtonElement>;
   public onGoCategoryClick: () => void;
   private question: Controls<HTMLElement>;
   private picturesWrapper: Controls<HTMLElement>;
+  private picture: Controls<HTMLElement>;
 
-  constructor(parentNode: HTMLElement) {
+  constructor(parentNode: HTMLElement, picture: any) {
     super(parentNode, "div", "questions-container");
     this.goCategoryButton = new Controls(this.node, "button", "button__categ", "Categories");
     this.question = new Controls(this.node, "h3", "question");
     this.picturesWrapper = new Controls(this.node, "div", "pictures__wrapper");
+    this.picture = picture;
     this.goCategoryButton.node.onclick = () => {
       this.onGoCategoryClick();
     }
