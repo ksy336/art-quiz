@@ -10,7 +10,7 @@ class PicCategories extends Controls {
   constructor(parentNode: HTMLElement) {
     super(parentNode, 'div', "categ" );
     this.goHomeButton = new Controls(this.node, 'button', '', 'Home');
-    const cardsForPicturesField = new CategoriesForPictures(this.node);
+    const categoriesForPictures = new CategoriesForPictures(this.node);
     this.goHomeButton.node.onclick = () => {
       this.onGoHomeClick();
     };

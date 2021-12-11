@@ -23,5 +23,9 @@ class Controls<NodeType extends HTMLElement = HTMLElement> {
   append(img: HTMLImageElement) {
     this.node.append(img);
   }
+
+  setAttribute(name: string, value: string) {
+
+  }
 }
 export default Controls;

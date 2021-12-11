@@ -5,8 +5,6 @@ import { PicturesQuiz } from './components/PicturesQuiz';
 import { Settings } from '../Settings/settings';
 import '../../styles.scss';
 import PicCategories from "../categories/PicCategories";
-import CardsField from "../categories/components/CategoriesForArtists";
-import QuestionsForArtists from "../QuestionsPage/QuestionsForArtists";
 
 export class Container extends Controls {
   constructor(parentNode: HTMLElement) {
@@ -41,12 +39,6 @@ export class Container extends Controls {
         this.startCycle();
       };
 
-      // const cardsField = new CardsField(this.node);
-      // cardsField.onGoToQuestionsClick = () => {
-      //   const questionsField = new QuestionsForArtists(this.node);
-      //   categories.destroy();
-      //   cardsField.destroy();
-      // }
     };
     settings.onGoSettingsClick = () => {
       artistsQuiz.destroy();
