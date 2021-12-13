@@ -48,17 +48,17 @@ interface MyInterface {
     private question: Controls<HTMLElement>;
     private answersContainer: Controls<HTMLElement>;
     private picturesWrapper: Controls<HTMLElement>;
-    public correctAuthor: string;
+    public correctAuthor: Array<string>;
     //public popup: Popup;
 
     constructor(parentNode: HTMLElement, correctAuthor: string) {
       super(parentNode, "div", "questions-container");
-      this.correctAuthor = correctAuthor;
+      this.correctAuthor = [];
       this.goCategoryButton = new Controls(this.node, "button", "button__categ", "Categories");
       this.question = new Controls(this.node, "h3", "question", "Кто автор данной картины?");
       this.picturesWrapper = new Controls(this.node, "div", "pictures__container");
       this.answersContainer = new Controls(this.node, "div", "answers__container");
-      this.getImages();
+      //this.getImages();
 
       this.goCategoryButton.node.onclick = () => {
         this.onGoCategoryClick();
@@ -80,13 +80,16 @@ interface MyInterface {
       console.log("hello");
       const containerWrapper = document.querySelector(".questions-container");
       const popupWrapper = document.createElement("div");
+      //containerWrapper.style.backgroundColor = "red";
       popupWrapper.classList.add("popup");
       const popup = new Popup(this.node);
+      popup.getDataForPopup();
       console.log(popup);
       popupWrapper.append(popup.element);
       if(containerWrapper) {
         containerWrapper.append(popupWrapper);
       }
+      return this;
     }
     async getImages() {
       try {
@@ -124,6 +127,12 @@ interface MyInterface {
           return item;
         })
 
+        // answers.forEach(item => {
+        //   item.addEventListener("click", () => {
+        //     item.style.backgroundColor = "red";
+        //   });
+        // })
+
         console.log(answers);
 
         if(allAnswers) {
@@ -149,7 +158,7 @@ interface MyInterface {
           console.log('Error');
         }
       }
-
+      return this;
     }
   }
 export default QuestionsForArtists;

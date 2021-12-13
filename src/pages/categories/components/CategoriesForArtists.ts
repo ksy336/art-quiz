@@ -48,8 +48,9 @@ class CategoriesForArtists extends Controls {
               if (cardsF) {
                 cardsF.remove();
               }
-              const questionsForArtists = new QuestionsForArtists(parentNode, "Альбрехт Дюрер");//должен же выводится не целый массив а один правильный автор
-              // console.log(questionsField);
+              const questionsForArtists = new QuestionsForArtists(parentNode, "[]");//должен же выводится не целый массив а один правильный автор
+              questionsForArtists.getImages();
+              questionsForArtists.correctAuthor.push("Альбрехт Дюрер");
               attribute = card.getAttribute("data-set");
               n = Number(`${attribute}`);
               pict = (n * 10);
